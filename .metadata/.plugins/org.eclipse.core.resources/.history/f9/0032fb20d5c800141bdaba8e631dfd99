@@ -1,0 +1,47 @@
+package com.oljubuncic1.models;
+
+import java.util.List;
+import java.util.Map;
+
+import com.oljubuncic1.entities.Facility;
+
+// data currently dummied by a Map
+public class FacilityDao implements ICrud<Facility, Integer>
+{
+	private Map<Integer, Facility> data;
+	
+	public FacilityDao() {
+		super();
+		
+	}
+
+	@Override
+	public Facility create(Facility t) {
+		
+	}
+
+	@Override
+	public Facility read(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Facility update(Facility t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(Facility t) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Facility> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

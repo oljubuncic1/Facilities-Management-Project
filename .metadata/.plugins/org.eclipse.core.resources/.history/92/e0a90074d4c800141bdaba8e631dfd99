@@ -1,0 +1,5 @@
+package com.oljubuncic1.models;
+
+public class FacilityDao {
+
+}
