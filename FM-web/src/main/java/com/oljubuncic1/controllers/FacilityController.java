@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.oljubuncic1.entities.Facility;
 import com.oljubuncic1.models.FacilityDao;
@@ -24,6 +25,14 @@ public class FacilityController
 		
 		model.addAttribute("facilitiesList", fd.getAll());
 		return "index";
+	}
+	
+	@RequestMapping(value="/single", method = RequestMethod.GET)
+	public String singleFacility(@RequestParam int fac_id, ModelMap model)
+	{
+		
+		model.addAttribute("singleFacility", fd.read(fac_id));
+		return "single";
 	}
 	
 	@RequestMapping(value="/add")

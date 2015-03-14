@@ -19,9 +19,9 @@
 
 <c:forEach var="fac" items="${facilitiesList }">
 <tr>
-<td>${fac.getId() }</td>
-<td>${fac.getName() }</td>
-<td>${fac.getDescription() }</td>
+<td>${fac.id }</td>
+<td><a href="${pageContext.request.contextPath}/facility/single?fac_id=${fac.id}">${fac.name }</a></td>
+<td>${fac.description }</td>
 </tr>
 </c:forEach>
 
