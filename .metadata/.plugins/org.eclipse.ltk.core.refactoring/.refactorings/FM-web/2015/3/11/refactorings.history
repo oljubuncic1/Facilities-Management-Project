@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;FM-web/WebContent/WEB-INF/FMWeb.xml&apos; to &apos;FMWeb-servlet.xml&apos;" description="Rename resource &apos;FMWeb.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="WebContent/WEB-INF/FMWeb.xml" name="FMWeb-servlet.xml" stamp="1426174763713" updateReferences="true"/>&#x0A;<refactoring comment="Move &apos;index.jsp&apos; to &apos;jsp&apos;" description="Move &apos;index.jsp&apos; to &apos;jsp&apos;" destination="WebContent/WEB-INF/jsp" element1="WebContent/WEB-INF/lib/index.jsp" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1426180531737" updateReferences="true"/>
-</session>
