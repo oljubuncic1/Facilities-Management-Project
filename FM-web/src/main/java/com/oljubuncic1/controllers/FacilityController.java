@@ -43,6 +43,13 @@ public class FacilityController
 		return "add";
 	}
 	
+	@RequestMapping(value="/delete")
+	public String delete(@RequestParam int fac_id)
+	{
+		fd.delete(fac_id);
+		return "redirect:/facility/list";
+	}
+	
 	
 	
 }

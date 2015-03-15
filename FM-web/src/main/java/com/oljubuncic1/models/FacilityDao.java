@@ -37,8 +37,8 @@ public class FacilityDao implements ICrud<Facility, Integer>
 	}
 
 	@Override
-	public void delete(Facility t) {
-		// TODO Auto-generated method stub
+	public void delete(Integer id) {
+		facilityData.remove(id);
 		
 	}
 
