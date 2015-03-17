@@ -23,6 +23,7 @@
 <td><a href="${pageContext.request.contextPath}/facility/single?fac_id=${fac.id}">${fac.name }</a></td>
 <td>${fac.description }</td>
 <td><input type="button"  onclick="location.href='${pageContext.request.contextPath}/facility/delete?fac_id=${fac.id }'" value="Delete" ></td>
+<td><input type="button"  onclick="location.href='${pageContext.request.contextPath}/facility/update?fac_id=${fac.id }'" value="Change" ></td>
 </tr>
 </c:forEach>
 

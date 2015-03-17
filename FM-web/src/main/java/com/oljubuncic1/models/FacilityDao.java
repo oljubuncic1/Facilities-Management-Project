@@ -32,8 +32,11 @@ public class FacilityDao implements ICrud<Facility, Integer>
 
 	@Override
 	public Facility update(Facility t) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//replace doesn't work
+		delete(t.getId());
+		return create(t);
+		
 	}
 
 	@Override

@@ -50,6 +50,21 @@ public class FacilityController
 		return "redirect:/facility/list";
 	}
 	
+	@RequestMapping(value="/updatePost")
+	public String updatePost(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
+	{
+		fd.update(f);
+		return "redirect:/facility/list";
+	}
+	
+	@RequestMapping(value="/update")
+	public String update(@RequestParam int fac_id, @ModelAttribute("Facility") Facility f, ModelMap model)
+	{
+		Facility current = fd.read(fac_id);
+		model.addAttribute("facility", current);
+		return "update";
+	}
+	
 	
 	
 }
