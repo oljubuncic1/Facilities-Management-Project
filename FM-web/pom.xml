@@ -5,6 +5,9 @@
 	<artifactId>FM-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+	<properties>
+		<jetty.port>9090</jetty.port>
+	</properties>
 	<build>
 		<plugins>
 			<plugin>
@@ -18,17 +21,20 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.4</version>
-				<configuration>
-					<warSourceDirectory>WebContent</warSourceDirectory>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+
 			</plugin>
 
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
-					<webApp>${basedir}/target/${artifactId}-${version}.war</webApp>
+					<webApp>${basedir}/target/${artifactId}-${version}</webApp>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>9090</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -71,6 +77,13 @@
 			<version>8.0.20</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.w3c.css</groupId>
+			<artifactId>sac</artifactId>
+			<version>1.3</version>
+		</dependency>
+
 
 	</dependencies>
 </project>

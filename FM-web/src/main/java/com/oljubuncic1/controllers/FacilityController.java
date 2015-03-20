@@ -19,7 +19,7 @@ public class FacilityController
 	private FacilityDao fd = new FacilityDao();
 	
 	
-	@RequestMapping(value="/list", method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String index(ModelMap model)
 	{
 		
@@ -38,8 +38,14 @@ public class FacilityController
 	@RequestMapping(value="/add")
 	public String add(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
 	{
-		if(f.getId()!=0)
 		fd.create(f);
+		return "redirect:/facility/";
+	}
+	
+	@RequestMapping(value="/addForm")
+	public String addForm(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
+	{
+		Facility.previousID();
 		return "add";
 	}
 	
@@ -47,19 +53,24 @@ public class FacilityController
 	public String delete(@RequestParam int fac_id)
 	{
 		fd.delete(fac_id);
-		return "redirect:/facility/list";
+		return "redirect:/facility/";
 	}
 	
 	@RequestMapping(value="/updatePost")
 	public String updatePost(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
 	{
+		
+		
 		fd.update(f);
-		return "redirect:/facility/list";
+		Facility.setcurrentID(Facility.maxID + 1);
+		return "redirect:/facility/";
 	}
 	
 	@RequestMapping(value="/update")
 	public String update(@RequestParam int fac_id, @ModelAttribute("Facility") Facility f, ModelMap model)
 	{
+		fd.delete(f.getId());
+		Facility.setcurrentID(fac_id - 1);
 		Facility current = fd.read(fac_id);
 		model.addAttribute("facility", current);
 		return "update";

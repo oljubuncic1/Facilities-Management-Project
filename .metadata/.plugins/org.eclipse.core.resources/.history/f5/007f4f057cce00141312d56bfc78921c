@@ -1,0 +1,23 @@
+@CHARSET "ISO-8859-1";
+
+body
+{
+	background-color:rgb(230,230,230);
+}
+
+div
+{
+	border:1px solid black;
+	
+}
+
+#first_col
+{
+	width: 10%;
+	float:left;
+}
+
+#second_col
+{
+	width:
+}

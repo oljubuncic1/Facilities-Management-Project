@@ -1,0 +1,68 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Add new facility</title>
+</head>
+<body>
+
+<h1>Add new facility</h1>
+
+	<form:form method="post" commandName="Facility" action="add">
+		
+			<div id="main_input">
+			<p id="input">
+			Facility information
+			</p>
+			
+			<p><i>Fields marked with * are mandatory</i></p>
+			
+			<div id="first_col">
+			<label>Name: *</label> <br>
+			<label>Address: *</label> <br>
+			<label>Website:</label> <br>
+			<label>Phone: *</label> <br>
+			<label>Email:</label> <br>
+			<label>Category: *</label> <br>
+			<label>Description: *</label> <br>
+			
+			</div>
+			
+			<div id="second_col">
+			<form:input path="name"/> <br> 
+			<form:input path="address"/> <br>
+			
+			</div>
+			
+			
+			
+			
+			
+			
+			<label>City: *</label>
+			<form:input path="city"/>
+			<label>Postal code: *</label>
+			<form:input path="postal_code"/>
+			
+			
+			</div>
+			
+			
+			<tr>
+				<td>Name</td>
+				<td><form:input path="name"/></td>
+			</tr>
+			<tr>
+				<td>Description</td>
+				<td><form:textarea path="description" cols="20" rows="5"></form:textarea></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Save"></td>
+			</tr>
+		
+	</form:form>
+
+</body>
+</html>
