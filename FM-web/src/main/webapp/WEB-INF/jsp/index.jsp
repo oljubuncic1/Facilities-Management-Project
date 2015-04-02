@@ -11,8 +11,61 @@
 
 <h1>Current facilities</h1>
 
+<div id="search_box">
+<input type="text"  maxlength="50" id="search_text" placeholder="Search for facilities...">
+<div id="search_icon_cont">
+<img src="/resources/search.png" alt="search" class="search_img" >
+</div>
+</div>
 
 
+<div id="prod_search">
+<h2>Find facilities</h2>
+<form method="post" action="something.php">
+<div id="search_form" class="container">
+
+
+
+
+<div id="l_search" class="cdiv">
+<p  class=" slabel">Category: </p>
+<select class="selement listbox">
+<option>All</option>
+<option>Food</option>
+<option>Sports</option>
+<option>Shopping</option>
+<option>Bussiness</option>
+<option>Entertainment</option>
+<option>Miscellaneous</option>
+</select>
+
+<p  class=" slabel">City: </p> 
+<input type="text" class="selement textbox" size="30" > <br>
+<p  class=" slabel">Country: </p> 
+<input type="text" class="selement textbox" size="30" >
+<p class=" slabel">Date: </p> 
+<select class="selement listbox">
+<option>Anytime</option>
+<option>This week</option>
+<option>This month</option>
+<option>This year</option>
+
+</select>
+
+</div>
+
+<div id="s_buttons" >
+
+
+<input type="submit" value="Search" class="styled-button-8">
+
+</div>
+
+</div>
+
+</form>
+
+</div>
 
 
 
