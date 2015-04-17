@@ -23,7 +23,7 @@
 <label>Choose the configuration: </label>
 <select id="conf_select" class="selement listbox"></select> 
 <input type="button" value="Add new configuration" class="styled-button-8"> <br> <br> <br>
-<input type="button" value="Upload" class="styled-button-8">
+<input type="submit" value="Upload" class="styled-button-8">
 </form:form>
 </body>
 </html>

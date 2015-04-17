@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oljubuncic1.entities.CSVConfiguration;
 import com.oljubuncic1.entities.Facility;
+import com.oljubuncic1.factory.CSVFactory;
+import com.oljubuncic1.models.ConfigurationDao;
 import com.oljubuncic1.models.FacilityDao;
 
 @Controller
@@ -17,6 +20,9 @@ import com.oljubuncic1.models.FacilityDao;
 public class FacilityController 
 {
 	private FacilityDao fd = new FacilityDao();
+	private ConfigurationDao cd = new ConfigurationDao();
+	
+	
 	
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
@@ -74,6 +80,43 @@ public class FacilityController
 		Facility current = fd.read(fac_id);
 		model.addAttribute("facility", current);
 		return "update";
+	}
+	
+	
+	@RequestMapping(value="/uploadForm", method = RequestMethod.GET)
+	public String uploadForm(ModelMap model)
+	{
+		
+		
+		return "upload";
+	}
+	
+	
+	@RequestMapping(value="/upload")
+	public String upload(ModelMap model)
+	{
+		
+		CSVFactory fact = new CSVFactory(cd.read("conf"), "C:\\Users\\Orhan\\Desktop\\sample.csv");
+		fact.createFacilities(fd);
+		return "upload";
+	}
+	
+	
+	@RequestMapping(value="/addConfForm")
+	public String addConfForm(@ModelAttribute("CSVConfiguration") CSVConfiguration c, Map<String, Object> map)
+	{
+		
+		
+		return "configuration";
+	}
+	
+	
+	@RequestMapping(value="/addConf")
+	public String addConf(@ModelAttribute("CSVConfiguration") CSVConfiguration c, Map<String, Object> map)
+	{
+		
+		cd.create(c);
+		return "configuration";
 	}
 	
 	

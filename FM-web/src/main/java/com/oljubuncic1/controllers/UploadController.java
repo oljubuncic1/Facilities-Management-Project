@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oljubuncic1.entities.CSVConfiguration;
 import com.oljubuncic1.entities.Configuration;
 import com.oljubuncic1.entities.Facility;
+import com.oljubuncic1.factory.CSVFactory;
+import com.oljubuncic1.models.ConfigurationDao;
 import com.oljubuncic1.models.FacilityDao;
 
 
@@ -21,31 +24,12 @@ import com.oljubuncic1.models.FacilityDao;
 public class UploadController {
 	
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
-	public String index(ModelMap model)
-	{
-		
-		
-		return "upload";
-	}
+	
+	
+
 	
 	
 	
-	@RequestMapping(value="/addConfForm")
-	public String addFormConfiguration(ModelMap model)
-	{
-		
-		
-		return "configuration";
-	}
 	
-	
-	@RequestMapping(value="/addConf")
-	public String addConfiguration(@ModelAttribute("Configuration") Configuration c, Map<String, Object> map)
-	{
-		
-		
-		return "configuration";
-	}
 
 }

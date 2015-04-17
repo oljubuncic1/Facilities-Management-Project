@@ -22,9 +22,9 @@ public class Facility {
 	}
 	
 	
-	public Facility(String name, String description, String website,
-			String address, String postal_code, String category, String city,
-			String country, String phone, String email) {
+	public Facility(String name, String address, String city,
+			String postal_code, String phone, String email, String website,
+			String category, String description, String country) {
 		super();
 		this.id = NextID();
 		this.name = name;

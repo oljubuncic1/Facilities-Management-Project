@@ -14,7 +14,7 @@
 
 <h1>Add new configuration</h1>
 
-	<form:form method="post" commandName="Configuration" action="addConf">
+	<form:form method="post" commandName="CSVConfiguration" action="addConf">
 		
 			<div id="main_input" width="100px">
 			<h2 id="input">
@@ -23,7 +23,7 @@
 			
 		
 			<label>Configuration name: </label> <br>
-			<input> <br>
+			<form:input path="name" /> <br>
 			
 			<label>File type: </label>
 			
@@ -59,19 +59,19 @@
 			<div class="label"><label>Address: </label></div>
 			<div class="label"><label>City: </label></div>
 			<div class="label"><label>Postal code: </label></div> <br>
-			<div class="label"><input /></div>
-			<div class="label"><input /></div>
-			<div class="label"><input /></div> <br>
+			<div class="label"><form:input path="data"/></div>
+			<div class="label"><form:input path="data" /></div>
+			<div class="label"><form:input path="data" /></div> <br>
 			<div class="label"><label>Phone: </label></div>
 			<div class="label"><label>Email:</label></div>
 			<div class="label"><label>Website:</label></div> <br>
-			<div class="label"><input /></div>
-			<div class="label"><input /></div>
-			<div class="label"><input /></div> <br>
+			<div class="label"><form:input path="data" /></div>
+			<div class="label"><form:input path="data"  /></div>
+			<div class="label"><form:input path="data"  /></div> <br>
 			<label>Category: </label> <br>
-			<input /> <br>
+			<form:input path="data" /> <br>
 			<label>Description: </label> <br>
-			<input  />
+			<form:input path="data"   />
 			
 			</div>
 			
