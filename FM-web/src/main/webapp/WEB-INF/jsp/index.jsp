@@ -95,7 +95,8 @@
 
 <br>
 <div class="butDiv">
-<input type="button" onclick="location.href='${pageContext.request.contextPath}/facility/addForm'" class="styled-button-8" value="Add new facility" style="width:100%">
+<input type="button" onclick="location.href='${pageContext.request.contextPath}/facility/addForm'" class="styled-button-8" value="Add new facility" style="width:45% float:left">
+<input type="button" onclick="location.href='${pageContext.request.contextPath}/facility/uploadForm'" class="styled-button-8" value="Import facilities" style="width:45% float:right">
 </div>
 </body>
 </html>

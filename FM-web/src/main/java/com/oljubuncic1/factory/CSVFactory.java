@@ -6,6 +6,8 @@ import com.oljubuncic1.entities.Facility;
 import com.oljubuncic1.models.FacilityDao;
 
 
+
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import au.com.bytecode.opencsv.CSVReader;
 public class CSVFactory {
 	
 	
+	private String cName;
 	private Configuration c;
 	private String file;
 	
@@ -25,6 +28,7 @@ public class CSVFactory {
 	private int numberAdded;
 	
 	
+	public CSVFactory() {}
 	
 	public CSVFactory(Configuration conf, String file)
 	{
@@ -55,17 +59,22 @@ public class CSVFactory {
 	}
 	
 	
-	public void createFacilities(FacilityDao fd)
+	public int createFacilities(FacilityDao fd)
 	{
 		
-		Map<Integer, String> attributes = new HashMap<Integer, String>();
+		// returns number of facilities added
 		
+		Map<Integer, String> attributes = new HashMap<Integer, String>();
+		int numberOfFac = 0;
 		try
         {
             //Get the CSVReader instance with specifying the delimiter to be used
             reader = new CSVReader(new FileReader(file),',');
             String [] nextLine;
-            //Read one line at a time
+            
+            
+            
+          //Read one line at a time
             while ((nextLine = reader.readNext()) != null)
             {
             	int i = 0;
@@ -78,7 +87,12 @@ public class CSVFactory {
                 
                 fd.create(new Facility(attributes.get(0), attributes.get(1), attributes.get(2), attributes.get(3), attributes.get(4), attributes.get(5), attributes.get(6), attributes.get(7), attributes.get(8), "BH"));
                 attributes.clear();
+                numberOfFac++;
             }
+            
+            
+            
+            
         }
         catch (Exception e) {
             
@@ -91,5 +105,16 @@ public class CSVFactory {
             }
         }
 		
+		return numberOfFac;
+	}
+
+
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 }

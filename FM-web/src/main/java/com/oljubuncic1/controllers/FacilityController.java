@@ -83,21 +83,26 @@ public class FacilityController
 	}
 	
 	
-	@RequestMapping(value="/uploadForm", method = RequestMethod.GET)
-	public String uploadForm(ModelMap model)
+	@RequestMapping(value="/uploadForm")
+	public String uploadForm(@ModelAttribute("CSVFactory") CSVFactory fact, ModelMap model)
 	{
 		
-		
+		model.addAttribute("configurations", cd.getAll());
 		return "upload";
 	}
 	
 	
 	@RequestMapping(value="/upload")
-	public String upload(ModelMap model)
+	public String upload(@ModelAttribute("CSVFactory") CSVFactory fact, ModelMap model)
 	{
 		
-		CSVFactory fact = new CSVFactory(cd.read("conf"), "C:\\Users\\Orhan\\Desktop\\sample.csv");
-		fact.createFacilities(fd);
+		fact.setFile("C:\\Users\\Orhan\\Desktop\\sample.csv");
+		fact.setC(cd.read(fact.getcName()));
+		//fact.setC(cd.read("conf"));
+		//CSVFactory fact = new CSVFactory(cd.read(con_name), "C:\\Users\\Orhan\\Desktop\\sample.csv");
+		int facCount = fact.createFacilities(fd);
+		model.addAttribute("numberUploaded", Integer.toString(facCount));
+		model.addAttribute("configurations", cd.getAll());
 		return "upload";
 	}
 	
@@ -116,7 +121,8 @@ public class FacilityController
 	{
 		
 		cd.create(c);
-		return "configuration";
+		
+		return "redirect:/facility/uploadForm";
 	}
 	
 	

@@ -9,21 +9,65 @@
 <link href="<c:url value="/resources/main.css" />" rel="stylesheet">
 <title>Upload facilities</title>
 </head>
-<body>
+<body onload="displayCount();">
 
 <h1>Upload facilities</h1>
 
 <br> <br> <br> <br> <br>
 
-<form:form method="post" action="upload">
+
+<script>
+
+	function displayCount()
+	{
+		var c = ${numberUploaded};
+		var d = document.getElementById('numberAdded');
+		
+		if( c != NaN)
+			{
+		
+				alert("notnan");
+				d.getElementsByTagName('p')[0].innerHTML = "You have successfully added " +  ${numberUploaded} + " facilities.";
+			}
+		else
+			{
+			alert("nan");
+			d.getElementsByTagName('p')[0].innerHTML = "";
+			}
+		
+		
+	}
+	
+
+	
+
+	
+	
+</script>
+
+<form:form method="post" commandName = "CSVFactory" action="upload">
 
 
 <label>Choose the data file:</label>
-<input type="file"> <br> <br> <br>
+<input type="file"/> <br> <br> <br>
 <label>Choose the configuration: </label>
-<select id="conf_select" class="selement listbox"></select> 
-<input type="button" value="Add new configuration" class="styled-button-8"> <br> <br> <br>
+<form:select id="conf_select" class="selement listbox" path="cName">
+<c:forEach var="con" items="${configurations}">
+<form:option value= "${con.name }" >${con.name }</form:option>
+</c:forEach>
+
+</form:select> 
+<a href ="${pageContext.request.contextPath}/facility/addConfForm">Add new configuration</a> <br> <br> <br>
 <input type="submit" value="Upload" class="styled-button-8">
 </form:form>
+
+<div id="numberAdded">
+<p></p>
+</div>
+
+<div class="back">
+<a href ="${pageContext.request.contextPath}/facility/">Back to facilities list</a>
+</div>
+
 </body>
 </html>
