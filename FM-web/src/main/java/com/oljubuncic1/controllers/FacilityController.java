@@ -1,5 +1,8 @@
 package com.oljubuncic1.controllers;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartResolver;
 
 import com.oljubuncic1.entities.CSVConfiguration;
 import com.oljubuncic1.entities.Facility;
@@ -93,15 +98,32 @@ public class FacilityController
 	
 	
 	@RequestMapping(value="/upload")
-	public String upload(@ModelAttribute("CSVFactory") CSVFactory fact, ModelMap model)
+	public String upload(@RequestParam("file") MultipartFile file, @RequestParam("cName") String cName, ModelMap model)
 	{
 		
-		fact.setFile("C:\\Users\\Orhan\\Desktop\\sample.csv");
-		fact.setC(cd.read(fact.getcName()));
+		//fact.setFile("C:\\Users\\Orhan\\Desktop\\sample.csv");
+		//fact.setC(cd.read(cName));
 		//fact.setC(cd.read("conf"));
-		//CSVFactory fact = new CSVFactory(cd.read(con_name), "C:\\Users\\Orhan\\Desktop\\sample.csv");
+		
+		
+		if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream =
+                        new BufferedOutputStream(new FileOutputStream(new File("fac.csv")));
+                stream.write(bytes);
+                stream.close();
+            }
+            catch(Exception e) {}
+            
+		}
+		CSVFactory fact = new CSVFactory(cd.read(cName), "fac.csv");
+                
+        
 		int facCount = fact.createFacilities(fd);
+		
 		model.addAttribute("numberUploaded", Integer.toString(facCount));
+		
 		model.addAttribute("configurations", cd.getAll());
 		return "upload";
 	}

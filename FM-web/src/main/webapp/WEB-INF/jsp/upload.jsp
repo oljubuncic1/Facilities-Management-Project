@@ -45,21 +45,21 @@
 	
 </script>
 
-<form:form method="post" commandName = "CSVFactory" action="upload">
+<form method="post" action="upload" enctype="multipart/form-data">
 
 
 <label>Choose the data file:</label>
-<input type="file"/> <br> <br> <br>
+<input type="file" name="file" /> <br> <br> <br>
 <label>Choose the configuration: </label>
-<form:select id="conf_select" class="selement listbox" path="cName">
+<select id="conf_select" class="selement listbox" name="cName">
 <c:forEach var="con" items="${configurations}">
-<form:option value= "${con.name }" >${con.name }</form:option>
+<option value= "${con.name }" >${con.name }</option>
 </c:forEach>
 
-</form:select> 
+</select> 
 <a href ="${pageContext.request.contextPath}/facility/addConfForm">Add new configuration</a> <br> <br> <br>
 <input type="submit" value="Upload" class="styled-button-8">
-</form:form>
+</form>
 
 <div id="numberAdded">
 <p></p>

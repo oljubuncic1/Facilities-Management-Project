@@ -7,12 +7,15 @@ import com.oljubuncic1.models.FacilityDao;
 
 
 
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.FileReader;
 import java.io.IOException;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -28,9 +31,10 @@ public class CSVFactory {
 	private int numberAdded;
 	
 	
+	
 	public CSVFactory() {}
 	
-	public CSVFactory(Configuration conf, String file)
+	public CSVFactory(Configuration conf, String  file)
 	{
 		setC(conf);
 		setFile(file);
@@ -49,12 +53,12 @@ public class CSVFactory {
 	}
 
 
-	public String getFile() {
+	public String  getFile() {
 		return file;
 	}
 
 
-	public void setFile(String file) {
+	public void setFile(String  file) {
 		this.file = file;
 	}
 	
@@ -70,6 +74,7 @@ public class CSVFactory {
         {
             //Get the CSVReader instance with specifying the delimiter to be used
             reader = new CSVReader(new FileReader(file),',');
+
             String [] nextLine;
             
             
