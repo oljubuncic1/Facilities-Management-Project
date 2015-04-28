@@ -10,50 +10,56 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.orm.hibernate3.HibernateTemplate;
+
 import com.oljubuncic1.entities.Facility;
 
-// data currently dummied by a Map
+
 public class FacilityDao implements ICrud<Facility, Integer>
 {
-	private Map<Integer, Facility> facilityData;
+	private HibernateTemplate template;
+	
+	public void setTemplate(HibernateTemplate template) {  
+	    this.template = template;  
+	    
+	}
 	
 	public FacilityDao() {
 		super();
-		facilityData = new HashMap<Integer, Facility>();
+		
 		
 	}
 
 	@Override
-	public Facility create(Facility t)
+	public Integer create(Facility t)
 	{
-		facilityData.put(t.getId(), t);
-		return t;
+		return (Integer)template.save(t);
 	}
 
 	@Override
 	public Facility read(Integer id)
 	{
-		return facilityData.get(id);
+		return (Facility)template.get(Facility.class, id);
 	}
 
 	@Override
-	public Facility update(Facility t) {
+	public void update(Facility t) {
 		
-		//replace doesn't work
 		
-		return create(t);
+		
+		 template.update(t);
 		
 	}
 
 	@Override
 	public void delete(Integer id) {
-		facilityData.remove(id);
+		template.delete(id);
 		
 	}
 
 	@Override
 	public Collection<Facility> getAll() {
-		List<Facility> f = new ArrayList<Facility>(facilityData.values());
+		List<Facility> f = template.loadAll(Facility.class);
 		
 		
 		

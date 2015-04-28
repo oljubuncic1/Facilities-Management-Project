@@ -23,20 +23,13 @@
 			
 			<label>Name: *</label> <br>
 			<form:input path="name"/> <br> 
-			<div class="label"><label>Address: *</label></div>
-			<div class="label"><label>City: *</label></div>
-			<div class="label"><label>Postal code: *</label></div> <br>
-			<div class="label"><form:input path="address"/></div>
-			<div class="label"><form:input path="city"/></div>
-			<div class="label"><form:input path="postal_code"/></div> <br>
-			<div class="label"><label>Phone: *</label></div>
-			<div class="label"><label>Email:</label></div>
+			
+			
 			<div class="label"><label>Website:</label></div> <br>
-			<div class="label"><form:input path="phone"/></div>
-			<div class="label"><form:input path="email"/></div>
+		
 			<div class="label"><form:input path="website"/></div> <br>
-			<label>Category: *</label> <br>
-			<form:input path="category"/> <br>
+			<label>Id: *</label> <br>
+			<form:input path="id"/> <br>
 			<label>Description: *</label> <br>
 			<form:textarea path="description" cols="30" rows="5"></form:textarea>
 			

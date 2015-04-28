@@ -22,10 +22,10 @@ public class ConfigurationDao implements ICrud<Configuration, String>
 	}
 
 	@Override
-	public Configuration create(Configuration t)
+	public String create(Configuration t)
 	{
 		configurationData.put(t.getName(), t);
-		return t;
+		return t.getName();
 	}
 
 	@Override
@@ -35,11 +35,11 @@ public class ConfigurationDao implements ICrud<Configuration, String>
 	}
 
 	@Override
-	public Configuration update(Configuration t) {
+	public void update(Configuration t) {
 		
 		//replace doesn't work
 		
-		return create(t);
+		create(t);
 		
 	}
 

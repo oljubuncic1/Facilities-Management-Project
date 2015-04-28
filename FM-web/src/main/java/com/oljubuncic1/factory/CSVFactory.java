@@ -90,7 +90,7 @@ public class CSVFactory {
                 }
                 
                 
-                fd.create(new Facility(attributes.get(0), attributes.get(1), attributes.get(2), attributes.get(3), attributes.get(4), attributes.get(5), attributes.get(6), attributes.get(7), attributes.get(8), "BH"));
+                //fd.create(new Facility(attributes.get(0), attributes.get(1), attributes.get(2), attributes.get(3), attributes.get(4), attributes.get(5), attributes.get(6), attributes.get(7), attributes.get(8), "BH"));
                 attributes.clear();
                 numberOfFac++;
             }

@@ -77,7 +77,7 @@
 <div class="smallImage"><img src="http://grfx.cstv.com/schools/ksu/graphics/training-facility/bg-home4.jpg" width="200" height="200"></div>
 <div class="smallInfo">
 <h2>${fac.name }</h2>
-<label>${fac.city }</label> <br>
+<label>${fac.description }</label> <br>
 
 
 

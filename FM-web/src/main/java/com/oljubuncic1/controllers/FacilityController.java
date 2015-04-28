@@ -5,6 +5,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
 
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,8 +28,13 @@ import com.oljubuncic1.models.FacilityDao;
 @RequestMapping("/facility")
 public class FacilityController 
 {
-	private FacilityDao fd = new FacilityDao();
+	//private FacilityDao fd = new FacilityDao();
 	private ConfigurationDao cd = new ConfigurationDao();
+	
+	Resource r =new ClassPathResource("/com/oljubuncic1/controllers/applicationContext.xml");  
+    BeanFactory factory=new XmlBeanFactory(r);  
+      
+    FacilityDao fd =(FacilityDao)factory.getBean("d");  
 	
 	
 	
@@ -56,7 +65,7 @@ public class FacilityController
 	@RequestMapping(value="/addForm")
 	public String addForm(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
 	{
-		Facility.previousID();
+		
 		return "add";
 	}
 	
@@ -73,7 +82,7 @@ public class FacilityController
 		
 		
 		fd.update(f);
-		Facility.setcurrentID(Facility.maxID + 1);
+		
 		return "redirect:/facility/";
 	}
 	
@@ -81,7 +90,7 @@ public class FacilityController
 	public String update(@RequestParam int fac_id, @ModelAttribute("Facility") Facility f, ModelMap model)
 	{
 		fd.delete(f.getId());
-		Facility.setcurrentID(fac_id - 1);
+		
 		Facility current = fd.read(fac_id);
 		model.addAttribute("facility", current);
 		return "update";
