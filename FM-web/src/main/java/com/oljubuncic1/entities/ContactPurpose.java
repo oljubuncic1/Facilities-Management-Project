@@ -21,8 +21,8 @@ public class ContactPurpose implements java.io.Serializable {
 	private int id;
 	private String name;
 	private String description;
-	private Set emails = new HashSet(0);
-	private Set phones = new HashSet(0);
+	private Set<Email> emails = new HashSet<Email>(0);
+	private Set<Phone> phones = new HashSet<Phone>(0);
 
 	public ContactPurpose() {
 	}
@@ -33,8 +33,8 @@ public class ContactPurpose implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public ContactPurpose(int id, String name, String description, Set emails,
-			Set phones) {
+	public ContactPurpose(int id, String name, String description, Set<Email> emails,
+			Set<Phone> phones) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -71,20 +71,20 @@ public class ContactPurpose implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactPurpose")
-	public Set getEmails() {
+	public Set<Email> getEmails() {
 		return this.emails;
 	}
 
-	public void setEmails(Set emails) {
+	public void setEmails(Set<Email> emails) {
 		this.emails = emails;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contactPurpose")
-	public Set getPhones() {
+	public Set<Phone> getPhones() {
 		return this.phones;
 	}
 
-	public void setPhones(Set phones) {
+	public void setPhones(Set<Phone> phones) {
 		this.phones = phones;
 	}
 

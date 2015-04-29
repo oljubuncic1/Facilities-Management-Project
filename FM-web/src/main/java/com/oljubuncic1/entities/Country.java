@@ -20,7 +20,7 @@ public class Country implements java.io.Serializable {
 
 	private int id;
 	private String name;
-	private Set cities = new HashSet(0);
+	private Set<City> cities = new HashSet<City>(0);
 
 	public Country() {
 	}
@@ -30,7 +30,7 @@ public class Country implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Country(int id, String name, Set cities) {
+	public Country(int id, String name, Set<City> cities) {
 		this.id = id;
 		this.name = name;
 		this.cities = cities;
@@ -56,11 +56,11 @@ public class Country implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
-	public Set getCities() {
+	public Set<City> getCities() {
 		return this.cities;
 	}
 
-	public void setCities(Set cities) {
+	public void setCities(Set<City> cities) {
 		this.cities = cities;
 	}
 

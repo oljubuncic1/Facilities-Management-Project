@@ -58,7 +58,9 @@ public class FacilityController
 	@RequestMapping(value="/add")
 	public String add(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
 	{
-		fd.create(f);
+		//fd.create(f);
+		fd.create(new Facility(1, "ime", "web", "desc"));
+		
 		return "redirect:/facility/";
 	}
 	

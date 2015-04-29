@@ -134,7 +134,7 @@ public class Facility implements java.io.Serializable {
 		return this.addresses;
 	}
 
-	public void setFacilityAddresses(Set<Address> addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 

@@ -1,52 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-    <beans  
-        xmlns="http://www.springframework.org/schema/beans"  
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-        xmlns:p="http://www.springframework.org/schema/p"  
-        xsi:schemaLocation="http://www.springframework.org/schema/beans  
-            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">  
-      
-      
-        <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">  
-            <property name="driverClassName"  value="org.postgresql.Driver"></property>  
-            <property name="url" value="jdbc:postgresql://localhost:5432/FMDatabase"></property>  
-            <property name="username" value="postgres"></property>  
-            <property name="password" value="a"></property>  
-        </bean>  
-          
-        <bean id="mysessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
-            <property name="dataSource" ref="dataSource"></property>  
-              
-            <property name="annotatedClasses">  
-            <list>  
-            <value>com.oljubuncic1.entities.Facility</value>
-            <value>com.oljubuncic1.entities.Category</value>
-            <value>com.oljubuncic1.entities.Address</value>
-             <value>com.oljubuncic1.entities.Phone</value>
-             <value>com.oljubuncic1.entities.Email</value>
-             <value>com.oljubuncic1.entities.City</value>
-             <value>com.oljubuncic1.entities.ContactPurpose</value>
-             <value>com.oljubuncic1.entities.Country</value>        
-            </list>  
-            </property>  
-              
-            <property name="hibernateProperties">  
-                <props>  
-                    <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>  
-                    <prop key="hibernate.hbm2ddl.auto">update</prop>  
-                    <prop key="hibernate.show_sql">true</prop>  
-                      
-                </props>  
-            </property>  
-        </bean>  
-          
-        <bean id="template" class="org.springframework.orm.hibernate3.HibernateTemplate">  
-        <property name="sessionFactory" ref="mysessionFactory"></property>  
-        </bean>  
-          
-        <bean id="d" class="com.oljubuncic1.models.FacilityDao">  
-        <property name="template" ref="template"></property>  
-        </bean>  
-          
-          
-        </beans>  
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver"></property>
+		<property name="url" value="jdbc:postgresql://localhost:5432/FMDatabase"></property>
+		<property name="username" value="postgres"></property>
+		<property name="password" value="a"></property>
+	</bean>
+
+	<bean id="mysessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+
+		<property name="annotatedClasses">
+			<list>
+				<value>com.oljubuncic1.entities.Facility</value>
+				<value>com.oljubuncic1.entities.Category</value>
+				<value>com.oljubuncic1.entities.Address</value>
+				<value>com.oljubuncic1.entities.Phone</value>
+				<value>com.oljubuncic1.entities.Email</value>
+				<value>com.oljubuncic1.entities.City</value>
+				<value>com.oljubuncic1.entities.ContactPurpose</value>
+				<value>com.oljubuncic1.entities.Country</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<bean id="template" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="mysessionFactory"></property>
+	</bean>
+
+	<bean id="d" class="com.oljubuncic1.models.FacilityDao">
+		<property name="template" ref="template"></property>
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="mysessionFactory" />
+	</bean>
+
+
+</beans>  

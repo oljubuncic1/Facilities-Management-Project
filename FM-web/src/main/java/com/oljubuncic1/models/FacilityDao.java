@@ -10,14 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate4.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.oljubuncic1.entities.Facility;
 
 
+@Repository
 public class FacilityDao implements ICrud<Facility, Integer>
 {
 	private HibernateTemplate template;
+	
 	
 	public void setTemplate(HibernateTemplate template) {  
 	    this.template = template;  
@@ -31,8 +35,10 @@ public class FacilityDao implements ICrud<Facility, Integer>
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Integer create(Facility t)
 	{
+		template.setCheckWriteOperations(false);
 		return (Integer)template.save(t);
 	}
 

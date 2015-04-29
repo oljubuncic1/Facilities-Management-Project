@@ -62,7 +62,7 @@ public class Category implements java.io.Serializable {
 		return this.parentCategory;
 	}
 
-	public void setparentCategory(Category parentCategory) {
+	public void setParentCategory(Category parentCategory) {
 		this.parentCategory = parentCategory;
 	}
 
@@ -89,7 +89,7 @@ public class Category implements java.io.Serializable {
 		return this.childCategories;
 	}
 
-	public void setCategories(Set<Category> childCategories) {
+	public void setChildCategories(Set<Category> childCategories) {
 		this.childCategories = childCategories;
 	}
 

@@ -23,7 +23,7 @@ public class City implements java.io.Serializable {
 	private int id;
 	private Country country;
 	private String name;
-	private Set addresses = new HashSet(0);
+	private Set<Address> addresses = new HashSet<Address>(0);
 
 	public City() {
 	}
@@ -34,7 +34,7 @@ public class City implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public City(int id, Country country, String name, Set addresses) {
+	public City(int id, Country country, String name, Set<Address> addresses) {
 		this.id = id;
 		this.country = country;
 		this.name = name;
@@ -71,11 +71,11 @@ public class City implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
-	public Set getAddresses() {
+	public Set<Address> getAddresses() {
 		return this.addresses;
 	}
 
-	public void setAddresses(Set addresses) {
+	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
 
