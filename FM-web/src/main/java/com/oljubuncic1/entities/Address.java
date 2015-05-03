@@ -62,7 +62,7 @@ public class Address implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "city_id", nullable = false)
 	public City getCity() {
 		return this.city;
@@ -99,7 +99,7 @@ public class Address implements java.io.Serializable {
 		this.postalCode = postalCode;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "addresses")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "addresses")
 	public Set<Facility> getFacilities() {
 		return this.facilities;
 	}

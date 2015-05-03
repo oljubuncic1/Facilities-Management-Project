@@ -18,15 +18,23 @@
 
 <div class="info">
 <p>
-<label><i>Address:</i></label> <br>
-<c:out value="${singleFacility.address}"/> <br>
-<c:out value="${singleFacility.city}"/> <br>
-<label><i>Category:</i></label> <br>
-<c:out value="${singleFacility.category}"/> <br>
+<label><i>Addresses:</i></label> <br>
+<c:forEach var="addr" items="${singleFacility.addresses }">
+<c:out value="${addr.street} ${addr.houseNumber }, ${addr.city.name }, ${addr.city.country.name }"/> <br>
+</c:forEach>
+<label><i>Categories:</i></label> <br>
+<c:forEach var="cat" items="${singleFacility.categories }">
+<c:out value="${cat.name }"/>
+</c:forEach> <br>
 
 <label><i>Contact information:</i></label> <br>
-<c:out value="${singleFacility.phone}"/> <br>
-<c:out value="${singleFacility.email}"/> <br>
+<c:forEach var="phone" items="${singleFacility.phones }">
+<c:out value="${phone.number }"/>
+</c:forEach> <br>
+<c:forEach var="mail" items="${singleFacility.emails }">
+<c:out value="${mail.address }"/>
+</c:forEach> <br>
+
 <c:out value="${singleFacility.website}"/> <br>
 </p>
 </div>

@@ -58,7 +58,7 @@ public class Facility implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return this.id;
 	}
@@ -94,7 +94,7 @@ public class Facility implements java.io.Serializable {
 		this.website = website;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="facility_category", joinColumns = { 
 			@JoinColumn(name = "facility_id", referencedColumnName="id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "category_id", referencedColumnName="id", 
@@ -107,7 +107,7 @@ public class Facility implements java.io.Serializable {
 		this.categories = categories;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "facility")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "facility")
 	public Set<Phone> getPhones() {
 		return this.phones;
 	}
@@ -116,7 +116,7 @@ public class Facility implements java.io.Serializable {
 		this.phones = phones;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "facility")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "facility")
 	public Set<Email> getEmails() {
 		return this.emails;
 	}
@@ -125,7 +125,7 @@ public class Facility implements java.io.Serializable {
 		this.emails = emails;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="facility_address", joinColumns = { 
 			@JoinColumn(name = "facility_id", referencedColumnName="id", nullable = false, updatable = false) }, 
 			inverseJoinColumns = { @JoinColumn(name = "address_id", referencedColumnName="id", 

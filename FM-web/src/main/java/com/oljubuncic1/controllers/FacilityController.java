@@ -12,16 +12,21 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oljubuncic1.entities.CSVConfiguration;
 import com.oljubuncic1.entities.Facility;
 import com.oljubuncic1.factory.CSVFactory;
+import com.oljubuncic1.models.AddressDao;
+import com.oljubuncic1.models.CityDao;
 import com.oljubuncic1.models.ConfigurationDao;
+import com.oljubuncic1.models.CountryDao;
 import com.oljubuncic1.models.FacilityDao;
 
 @Controller
@@ -34,7 +39,10 @@ public class FacilityController
 	Resource r =new ClassPathResource("/com/oljubuncic1/controllers/applicationContext.xml");  
     BeanFactory factory=new XmlBeanFactory(r);  
       
-    FacilityDao fd =(FacilityDao)factory.getBean("d");  
+    FacilityDao fd =(FacilityDao)factory.getBean("facDao");
+    AddressDao ad = (AddressDao)factory.getBean("addressDao");
+    CityDao cityd = (CityDao)factory.getBean("cityDao");
+    CountryDao countryd = (CountryDao)factory.getBean("countryDao");
 	
 	
 	
@@ -156,6 +164,16 @@ public class FacilityController
 		cd.create(c);
 		
 		return "redirect:/facility/uploadForm";
+	}
+	
+	@RequestMapping(value="/search/{searchString}")
+	public String searchByParameter(@PathVariable String searchString, ModelMap model)
+	{
+		
+		model.clear();
+		model.addAttribute("facilitiesList1", fd.getAllByParamList(searchString));
+		
+		return "search";
 	}
 	
 	

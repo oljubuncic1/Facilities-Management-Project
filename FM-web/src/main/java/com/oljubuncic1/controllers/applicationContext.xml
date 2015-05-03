@@ -43,7 +43,19 @@
 		<property name="sessionFactory" ref="mysessionFactory"></property>
 	</bean>
 
-	<bean id="d" class="com.oljubuncic1.models.FacilityDao">
+	<bean id="facDao" class="com.oljubuncic1.models.FacilityDao">
+		<property name="template" ref="template"></property>
+	</bean>
+	
+	<bean id="cityDao" class="com.oljubuncic1.models.CityDao">
+		<property name="template" ref="template"></property>
+	</bean>
+	
+	<bean id="countryDao" class="com.oljubuncic1.models.CountryDao">
+		<property name="template" ref="template"></property>
+	</bean>
+	
+	<bean id="addressDao" class="com.oljubuncic1.models.AddressDao">
 		<property name="template" ref="template"></property>
 	</bean>
 
@@ -51,6 +63,14 @@
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="mysessionFactory" />
 	</bean>
+	
+	<bean name="openSessionInViewInterceptor"
+        class="org.springframework.orm.hibernate4.support.OpenSessionInViewInterceptor">
+        <property name="sessionFactory">
+            <ref bean="mysessionFactory" />
+        </property>
+        <property name="flushModeName" value="FLUSH_AUTO" />
+    </bean>
 
 
 </beans>  

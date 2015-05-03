@@ -5,11 +5,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/main.css" />" rel="stylesheet">
 
-<title>Current facilities</title>
+<title>Search results</title>
 </head>
 <body>
 
-<h1>Current facilities</h1>
+<h1>Search results</h1>
 
 <div id="search_box">
 <input type="text"  maxlength="50" id="search_text" placeholder="Search for facilities...">
@@ -72,7 +72,7 @@
 
 
 
-<c:forEach var="fac" items="${facilitiesList }">
+<c:forEach var="fac" items="${facilitiesList1 }">
 
 
 <div class="single">
