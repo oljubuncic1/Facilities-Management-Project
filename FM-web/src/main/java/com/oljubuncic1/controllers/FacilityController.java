@@ -3,6 +3,8 @@ package com.oljubuncic1.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.BeanFactory;
@@ -16,14 +18,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oljubuncic1.entities.CSVConfiguration;
+import com.oljubuncic1.entities.City;
 import com.oljubuncic1.entities.Facility;
 import com.oljubuncic1.factory.CSVFactory;
 import com.oljubuncic1.models.AddressDao;
+import com.oljubuncic1.models.CategoryDao;
 import com.oljubuncic1.models.CityDao;
 import com.oljubuncic1.models.ConfigurationDao;
 import com.oljubuncic1.models.CountryDao;
@@ -43,6 +48,7 @@ public class FacilityController
     AddressDao ad = (AddressDao)factory.getBean("addressDao");
     CityDao cityd = (CityDao)factory.getBean("cityDao");
     CountryDao countryd = (CountryDao)factory.getBean("countryDao");
+    CategoryDao categd = (CategoryDao)factory.getBean("categoryDao");
 	
 	
 	
@@ -52,6 +58,8 @@ public class FacilityController
 	{
 		
 		model.addAttribute("facilitiesList", fd.getAll());
+		model.addAttribute("countriesList", countryd.getAll());
+		model.addAttribute("categoriesList", categd.getAll());
 		return "index";
 	}
 	
@@ -174,6 +182,37 @@ public class FacilityController
 		model.addAttribute("facilitiesList1", fd.getAllByParamList(searchString));
 		
 		return "search";
+	}
+	
+	
+	@RequestMapping(value="/country/{selectedCountry}")
+	public @ResponseBody Collection<String> populateCities(@PathVariable String selectedCountry, ModelMap model)
+	{
+		
+		Collection<String> cities = cityd.getByCountry(selectedCountry);
+		
+		return cities;
+	}
+	
+	
+	@RequestMapping(value="/advancedSearch")
+	public String advancedSearch(@RequestParam("facName") String facName, @RequestParam("catName") String catName,
+			@RequestParam("addrName") String addrName, @RequestParam("num") String num,
+			@RequestParam("countryName") String countryName, @RequestParam("cityName") String cityName, ModelMap model)
+	{
+		
+		if(facName == null) facName = "";
+		if(catName == "Any") catName = "Any";
+		if(addrName == null) addrName = "";
+		if(num == null) num = "";
+		if(countryName == null) countryName = "Any";
+		if(cityName == null) cityName = "Any";
+		
+		
+		
+		model.clear();
+		model.addAttribute("facilitiesList2", fd.getAllByMultipleParamList(facName, catName, addrName, num, "Any", "Any"));
+		return "advancedSearch";
 	}
 	
 	

@@ -140,6 +140,42 @@ public class FacilityDao implements ICrud<Facility, Integer>
 	}
 	
 	
+	public Collection<Facility> getAllByMultipleParamList(String name, String category, String address, String number, String country, String city)
+	{
+		
+		String exp = "=";
+		
+		if(category=="Any" || category=="") category = "%";
+		if(city=="Any") city = "%";
+		if(country=="Any") country = "%";
+		if(name=="") name="%";
+		if(address=="") address="%";
+		if(number=="") {
+			exp = "like";
+			number = "%";
+		}
+		
+		name = name.toUpperCase();
+		category = category.toUpperCase();
+		address = address.toUpperCase();
+		city = city.toUpperCase();
+		country = country.toUpperCase();
+		
+		Object[] params  = {name,address,number,city,country,category};
+		
+		
+		List<Integer> l = (List<Integer>) template.find("select distinct f.id from Facility f join f.addresses a join a.city c join c.country cr join f.categories cat"
+				+ " where upper(f.name) like ? and upper(a.street) like ? "
+				+ "and a.houseNumber " + exp + " ? and upper(c.name) like ? and upper(cr.name) like ? and upper(cat.name) like ?", params);
+		
+		Collection<Facility> f = makeFacilities(l);
+		
+		return f;
+		
+		
+	}
+	
+	
 	private Collection<Facility> makeFacilities(List<Integer> l)
 	{
 		Collection<Facility> c = new ArrayList<Facility>();

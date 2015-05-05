@@ -9,65 +9,140 @@
 </head>
 <body>
 
+<script>
+	
+	function showCities()
+	{
+			var country = document.getElementById('con').value;
+			
+			if(country == 'Any')
+				{
+				
+				document.getElementById('cityDiv').style.display = 'none';
+				}
+			
+			else
+			$.ajax({
+				url : "${pageContext.request.contextPath}/facility/country/" + country,
+				type : "GET",
+				 beforeSend: function(xhr) {
+			            xhr.setRequestHeader("Accept", "application/json");
+			            xhr.setRequestHeader("Content-Type", "application/json");
+			        },
+ 
+				success : function(response) {
+					
+					
+					
+					var city = document.getElementById('cit');
+					$("#cit").empty();
+					var any = document.createElement("option");
+					any.text = "Any";
+					city.add(any);
+					
+					for(var i=0;i<response.length;i++)
+						{
+							var option = document.createElement("option");
+							option.text = response[i];
+							city.add(option);
+						
+						
+						}
+					
+					
+					document.getElementById('cityDiv').style.display = 'block';
+					
+				},
+				error : function(xhr, status, error) {
+					alert(xhr.responseText);
+				}
+			});
+		
+	}
+	</script>
+
 <h1>Search results</h1>
 
 <div id="search_box">
-<input type="text"  maxlength="50" id="search_text" placeholder="Search for facilities...">
-<div id="search_icon_cont">
-<input type="button" id="searchButton" onclick="location.href='${pageContext.request.contextPath}/facility/search/' + document.getElementById('search_text').value;" class="styled-button-8" value="Search">
+		<input type="text" maxlength="50" id="search_text"
+			placeholder="Search for facilities...">
+		<div id="search_icon_cont">
+			<input type="button" id="searchButton"
+				onclick="location.href='${pageContext.request.contextPath}/facility/search/' + document.getElementById('search_text').value;"
+				class="styled-button-8" value="Search" style="float:right">
+		</div>
+	</div>
+
+
+<div class="back1">
+<a href ="${pageContext.request.contextPath}/facility/">Back to facilities list</a>
 </div>
-</div>
-
-
-
 
 <div id="prod_search">
-<h2>Find facilities</h2>
-<form method="post" action="something.php">
-<div id="search_form" class="container">
+		<h2>Find facilities</h2>
 
 
+		
+			<div id="search_form" class="container">
+
+				<form method="post" action = "${pageContext.request.contextPath}/facility/advancedSearch">
 
 
-<div id="l_search" class="cdiv">
-<p  class=" slabel">Category: </p>
-<select class="selement listbox">
-<option>All</option>
-<option>Food</option>
-<option>Sports</option>
-<option>Shopping</option>
-<option>Bussiness</option>
-<option>Entertainment</option>
-<option>Miscellaneous</option>
-</select>
-
-<p  class=" slabel">City: </p> 
-<input type="text" class="selement textbox" size="30" > <br>
-<p  class=" slabel">Country: </p> 
-<input type="text" class="selement textbox" size="30" >
-<p class=" slabel">Date: </p> 
-<select class="selement listbox">
-<option>Anytime</option>
-<option>This week</option>
-<option>This month</option>
-<option>This year</option>
-
-</select>
-
-</div>
-
-<div id="s_buttons" >
+				<div id="l_search" class="cdiv">
+					<p class="slabel">Name:</p>
+					<input type="text" class="selement textbox" size="30" name="facName"> <br>
 
 
-<input type="submit" value="Search" class="styled-button-8">
+					<p class=" slabel">Category:</p>
+					<select class="selement listbox" name="catName">
+						<option>Any</option>
+						<c:forEach var="categ" items="${categoriesList }">
+						<option>${categ.name }</option>
+						</c:forEach>
+					</select> <br>
 
-</div>
+					<p class=" slabel">Address:</p>
+					<input type="text" class="selement textbox" size="30" name="addrName"> <br>
 
-</div>
+					<p class=" slabel">Street number:</p>
+					<input type="text" class="selement numeric" size="30" name="num"> <br>
 
-</form>
 
-</div>
+					<p class=" slabel">Country:</p>
+					
+					
+					<select id="con" class="selement listbox" onchange="showCities()" name="countryName">
+					
+						<option>Any</option>
+						<c:forEach var="c" items="${countriesList }">
+						<option>${c.name }</option>
+						</c:forEach>
+					</select>
+					 <br>
+					
+					<div id="cityDiv" style="display:none">
+					<p class=" slabel">City:</p>
+					<select id="cit" class="selement listbox" name="cityName">
+						<option>Any</option>
+					</select></div> <br>
+
+
+				</div>
+
+				<div id="s_buttons">
+
+
+					<input type="submit" value="Search" class="styled-button-8">
+
+				</div>
+				
+				</form>
+
+			</div>
+
+		
+
+	</div>
 
 
 

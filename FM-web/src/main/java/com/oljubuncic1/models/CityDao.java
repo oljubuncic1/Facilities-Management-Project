@@ -87,5 +87,20 @@ public class CityDao implements ICrud<City, Integer>
 		
 		
 	}
+	
+	
+	@Transactional
+	public Collection<String> getByCountry(String country)
+	{
+		String p = country;
+		p = p.toUpperCase();
+		Object[] params  = {p};
+		
+		
+		List<String> l = (List<String>) template.find("select distinct c.name from City c join c.country cr"
+				+ " where upper(cr.name) = ?", params);
+		
+		return l;
+	}
 
 }

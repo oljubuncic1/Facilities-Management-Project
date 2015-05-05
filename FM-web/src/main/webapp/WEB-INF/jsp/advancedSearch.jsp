@@ -7,12 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/main.css" />" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<title>Current facilities1</title>
+<title>Advanced search results</title>
 </head>
 <body>
 
-
-	<script>
+<script>
 	
 	function showCities()
 	{
@@ -41,14 +40,12 @@
 					$("#cit").empty();
 					var any = document.createElement("option");
 					any.text = "Any";
-					any.value="Any";
 					city.add(any);
 					
 					for(var i=0;i<response.length;i++)
 						{
 							var option = document.createElement("option");
 							option.text = response[i];
-							option.value = response[i];
 							city.add(option);
 						
 						
@@ -65,22 +62,24 @@
 		
 	}
 	</script>
-
-	<h1>Current facilities1</h1>
-
+	
+	<h1>Advanced search results</h1>
+	
 	<div id="search_box">
 		<input type="text" maxlength="50" id="search_text"
 			placeholder="Search for facilities...">
 		<div id="search_icon_cont">
 			<input type="button" id="searchButton"
 				onclick="location.href='${pageContext.request.contextPath}/facility/search/' + document.getElementById('search_text').value;"
-				class="styled-button-8" value="Search" >
+				class="styled-button-8" value="Search" style="float:right">
 		</div>
 	</div>
-
-
-
-
+	
+	
+	<div class="back1">
+<a href ="${pageContext.request.contextPath}/facility/">Back to facilities list</a>
+</div>
+	
 	<div id="prod_search">
 		<h2>Find facilities</h2>
 
@@ -98,9 +97,9 @@
 
 					<p class=" slabel">Category:</p>
 					<select class="selement listbox" name="catName">
-						<option value="Any" selected="selected">Any</option>
+						<option>Any</option>
 						<c:forEach var="categ" items="${categoriesList }">
-						<option value="${categ.name }">${categ.name }</option>
+						<option>${categ.name }</option>
 						</c:forEach>
 					</select> <br>
 
@@ -116,9 +115,9 @@
 					
 					<select id="con" class="selement listbox" onchange="showCities()" name="countryName">
 					
-						<option value="Any">Any</option>
+						<option>Any</option>
 						<c:forEach var="c" items="${countriesList }">
-						<option value="${c.name }">${c.name }</option>
+						<option>${c.name }</option>
 						</c:forEach>
 					</select>
 					 <br>
@@ -126,7 +125,7 @@
 					<div id="cityDiv" style="display:none">
 					<p class=" slabel">City:</p>
 					<select id="cit" class="selement listbox" name="cityName">
-						<option value="Any">Any</option>
+						<option>Any</option>
 					</select></div> <br>
 
 
@@ -146,11 +145,20 @@
 		
 
 	</div>
+	
+
+	
+
+	<p>${proba }</p>
 
 
 
 
-	<c:forEach var="fac" items="${facilitiesList }">
+	
+
+
+
+	<c:forEach var="fac" items="${facilitiesList2 }">
 
 
 		<div class="single">

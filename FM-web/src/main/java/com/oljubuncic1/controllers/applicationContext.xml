@@ -58,6 +58,10 @@
 	<bean id="addressDao" class="com.oljubuncic1.models.AddressDao">
 		<property name="template" ref="template"></property>
 	</bean>
+	
+	<bean id="categoryDao" class="com.oljubuncic1.models.CategoryDao">
+		<property name="template" ref="template"></property>
+	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
