@@ -178,8 +178,13 @@ public class FacilityController
 	public String searchByParameter(@PathVariable String searchString, ModelMap model)
 	{
 		
+		Collection<Facility> n = fd.getAllByParamList(searchString);
+		
 		model.clear();
-		model.addAttribute("facilitiesList1", fd.getAllByParamList(searchString));
+		model.addAttribute("countriesList", countryd.getAll());
+		model.addAttribute("categoriesList", categd.getAll());
+		model.addAttribute("numberOfFac", n.size());
+		model.addAttribute("facilitiesList1", n);
 		
 		return "search";
 	}
@@ -202,16 +207,20 @@ public class FacilityController
 	{
 		
 		if(facName == null) facName = "";
-		if(catName == "Any") catName = "Any";
+		if(catName.compareTo("Any") == 0) catName = "Any";
+		if(countryName.compareTo("Any") == 0) countryName = "Any";
+		if(cityName.compareTo("Any") == 0) cityName = "Any";
 		if(addrName == null) addrName = "";
 		if(num == null) num = "";
-		if(countryName == null) countryName = "Any";
-		if(cityName == null) cityName = "Any";
 		
 		
+		Collection<Facility> n = fd.getAllByMultipleParamList(facName, catName, addrName, num, countryName, cityName);
 		
 		model.clear();
-		model.addAttribute("facilitiesList2", fd.getAllByMultipleParamList(facName, catName, addrName, num, "Any", "Any"));
+		model.addAttribute("countriesList", countryd.getAll());
+		model.addAttribute("categoriesList", categd.getAll());
+		model.addAttribute("numberOfFac", n.size());
+		model.addAttribute("facilitiesList2", n);
 		return "advancedSearch";
 	}
 	

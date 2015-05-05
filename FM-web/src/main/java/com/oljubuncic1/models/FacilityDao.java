@@ -145,7 +145,7 @@ public class FacilityDao implements ICrud<Facility, Integer>
 		
 		String exp = "=";
 		
-		if(category=="Any" || category=="") category = "%";
+		if(category == "Any") category = "%";
 		if(city=="Any") city = "%";
 		if(country=="Any") country = "%";
 		if(name=="") name="%";

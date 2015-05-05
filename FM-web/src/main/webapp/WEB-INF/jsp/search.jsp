@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/main.css" />" rel="stylesheet">
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <title>Search results</title>
 </head>
 <body>
@@ -38,6 +38,7 @@
 					$("#cit").empty();
 					var any = document.createElement("option");
 					any.text = "Any";
+					any.value="Any";
 					city.add(any);
 					
 					for(var i=0;i<response.length;i++)
@@ -74,8 +75,13 @@
 	</div>
 
 
+<div id="numFac">
+	<p>We have found ${numberOfFac } facilities matching your search</p>
+	</div>
+
+
 <div class="back1">
-<a href ="${pageContext.request.contextPath}/facility/">Back to facilities list</a>
+<a href ="${pageContext.request.contextPath}/facility/">Back to homepage</a>
 </div>
 
 <div id="prod_search">
@@ -95,9 +101,9 @@
 
 					<p class=" slabel">Category:</p>
 					<select class="selement listbox" name="catName">
-						<option>Any</option>
+						<option value="Any" selected="selected">Any</option>
 						<c:forEach var="categ" items="${categoriesList }">
-						<option>${categ.name }</option>
+						<option value="${categ.name }">${categ.name }</option>
 						</c:forEach>
 					</select> <br>
 
@@ -113,9 +119,9 @@
 					
 					<select id="con" class="selement listbox" onchange="showCities()" name="countryName">
 					
-						<option>Any</option>
+						<option value="Any">Any</option>
 						<c:forEach var="c" items="${countriesList }">
-						<option>${c.name }</option>
+						<option value="${c.name }">${c.name }</option>
 						</c:forEach>
 					</select>
 					 <br>
@@ -123,7 +129,7 @@
 					<div id="cityDiv" style="display:none">
 					<p class=" slabel">City:</p>
 					<select id="cit" class="selement listbox" name="cityName">
-						<option>Any</option>
+						<option value="Any">Any</option>
 					</select></div> <br>
 
 
@@ -143,6 +149,7 @@
 		
 
 	</div>
+
 
 
 

@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="<c:url value="/resources/main.css" />" rel="stylesheet">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<title>Current facilities1</title>
+<title>Current facilities</title>
 </head>
 <body>
 
@@ -66,7 +66,7 @@
 	}
 	</script>
 
-	<h1>Current facilities1</h1>
+	<h1>Current facilities</h1>
 
 	<div id="search_box">
 		<input type="text" maxlength="50" id="search_text"
