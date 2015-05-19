@@ -13,7 +13,7 @@ body
 	position:absolute;
 	top:20%;
 	left:10%;
-	border:1px solid red;
+	
 }
 
 .label
@@ -43,6 +43,14 @@ p
 {
 	float:right;
 	position:fixed;
+	left:40%;
+	top:80%;
+}
+
+.buttonsadd
+{
+	float:right;
+	position:relative;
 	left:40%;
 	top:80%;
 }
@@ -320,7 +328,11 @@ a
 	top:100px;
 }
 
-
+#address_div
+{
+	width:100%;
+	position:relative;
+}
       
 
 

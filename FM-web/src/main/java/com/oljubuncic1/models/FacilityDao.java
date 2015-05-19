@@ -14,6 +14,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.hibernate.FlushMode;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,9 +50,14 @@ public class FacilityDao implements ICrud<Facility, Integer>
 	{
 		//template.setCheckWriteOperations(false);
 	
-		//template.getSessionFactory().getCurrentSession().setFlushMode(FlushMode.AUTO);
 		
-		return (Integer)template.save(t);
+		Session s = template.getSessionFactory().openSession();
+		Transaction tx = s.beginTransaction();
+		s.setFlushMode(FlushMode.AUTO);
+		
+		Integer id = (Integer) s.save(t);
+		tx.commit();
+		return id;
 	}
 
 	@Override

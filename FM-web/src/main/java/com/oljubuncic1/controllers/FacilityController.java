@@ -72,12 +72,13 @@ public class FacilityController
 	}
 	
 	@RequestMapping(value="/add")
-	public String add(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
+	public String add(@RequestParam("website") String facName, @RequestParam("street") List<String> facName1, @ModelAttribute("Facility") Facility f, Map<String, Object> map, ModelMap model)
 	{
 		//fd.create(f);
-		fd.create(new Facility(1, "ime", "web", "desc"));
-		
-		return "redirect:/facility/";
+		fd.create(new Facility(123, "ime", "web", "desc"));
+		model.addAttribute("proba", facName1.get(0));
+		//return "redirect:/facility/";
+		return "add";
 	}
 	
 	@RequestMapping(value="/addForm")
