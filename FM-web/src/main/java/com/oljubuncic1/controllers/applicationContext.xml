@@ -10,6 +10,7 @@
 		<property name="url" value="jdbc:postgresql://localhost:5432/FMDatabase"></property>
 		<property name="username" value="postgres"></property>
 		<property name="password" value="a"></property>
+		
 	</bean>
 
 	<bean id="mysessionFactory"
@@ -60,6 +61,14 @@
 	</bean>
 	
 	<bean id="categoryDao" class="com.oljubuncic1.models.CategoryDao">
+		<property name="template" ref="template"></property>
+	</bean>
+	
+	<bean id="phoneDao" class="com.oljubuncic1.models.PhoneDao">
+		<property name="template" ref="template"></property>
+	</bean>
+	
+	<bean id="emailDao" class="com.oljubuncic1.models.EmailDao">
 		<property name="template" ref="template"></property>
 	</bean>
 

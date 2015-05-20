@@ -5,6 +5,8 @@ package com.oljubuncic1.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,10 +28,9 @@ public class Phone implements java.io.Serializable {
 	public Phone() {
 	}
 
-	public Phone(int id, ContactPurpose contactPurpose, Facility facility,
-			String number, String type) {
+	public Phone(int id, String number, String type, Facility facility) {
 		this.id = id;
-		this.contactPurpose = contactPurpose;
+		//this.contactPurpose = contactPurpose;
 		this.facility = facility;
 		this.number = number;
 		this.type = type;
@@ -37,6 +38,7 @@ public class Phone implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public int getId() {
 		return this.id;
 	}
@@ -46,7 +48,7 @@ public class Phone implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "contact_purpose_id", nullable = false)
+	@JoinColumn(name = "contact_purpose_id", nullable = true)
 	public ContactPurpose getContactPurpose() {
 		return this.contactPurpose;
 	}
@@ -56,7 +58,7 @@ public class Phone implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "facility_id", nullable = false)
+	@JoinColumn(name = "facility_id", nullable = true)
 	public Facility getFacility() {
 		return this.facility;
 	}

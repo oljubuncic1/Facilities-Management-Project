@@ -3,9 +3,21 @@ package com.oljubuncic1.controllers;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+
+
+
+
+
+
+
+
+import java.util.Set;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
@@ -23,16 +35,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.oljubuncic1.entities.Address;
 import com.oljubuncic1.entities.CSVConfiguration;
+import com.oljubuncic1.entities.Category;
 import com.oljubuncic1.entities.City;
+import com.oljubuncic1.entities.Country;
+import com.oljubuncic1.entities.Email;
 import com.oljubuncic1.entities.Facility;
+import com.oljubuncic1.entities.Phone;
 import com.oljubuncic1.factory.CSVFactory;
 import com.oljubuncic1.models.AddressDao;
 import com.oljubuncic1.models.CategoryDao;
 import com.oljubuncic1.models.CityDao;
 import com.oljubuncic1.models.ConfigurationDao;
 import com.oljubuncic1.models.CountryDao;
+import com.oljubuncic1.models.EmailDao;
 import com.oljubuncic1.models.FacilityDao;
+import com.oljubuncic1.models.PhoneDao;
 
 @Controller
 @RequestMapping("/facility")
@@ -49,6 +68,8 @@ public class FacilityController
     CityDao cityd = (CityDao)factory.getBean("cityDao");
     CountryDao countryd = (CountryDao)factory.getBean("countryDao");
     CategoryDao categd = (CategoryDao)factory.getBean("categoryDao");
+    PhoneDao phoned = (PhoneDao)factory.getBean("phoneDao");
+    EmailDao emaild = (EmailDao)factory.getBean("emailDao");
 	
 	
 	
@@ -72,13 +93,35 @@ public class FacilityController
 	}
 	
 	@RequestMapping(value="/add")
-	public String add(@RequestParam("website") String facName, @RequestParam("street") List<String> facName1, @ModelAttribute("Facility") Facility f, Map<String, Object> map, ModelMap model)
+	public String add(@RequestParam("name") String facName, @RequestParam("website") String facWebsite, @RequestParam("street") List<String> facStreets,
+			@RequestParam("number") List<String> facNumbers, @RequestParam("postal_code") List<String> facCodes,
+			@RequestParam("city") List<String> facCities, @RequestParam("country") List<String> facCountries,
+			@RequestParam("phone") List<String> facPhones, @RequestParam("email") List<String> facEmails,
+			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, Map<String, Object> map, ModelMap model)
 	{
+		
 		//fd.create(f);
-		fd.create(new Facility(123, "ime", "web", "desc"));
-		model.addAttribute("proba", facName1.get(0));
-		//return "redirect:/facility/";
-		return "add";
+		//fd.create(new Facility(123, "ime1", "web1", "desc1"));
+		//cityd.create(new City(1, new Country(1, "Drzava1"), "Grad1"));
+		
+		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite));
+		Facility f = fd.read(id);
+		
+		
+		
+		Collection<Country> countries = countryd.getByName(facCountries);
+		Collection<City> cities = cityd.getByName(facCities, countries);
+		Collection<Address> addresses = ad.getByName(facStreets, facNumbers, facCodes,  cities,  countries);
+		Collection<Category> categories = categd.getByName(facCategories);
+		Collection<Email> emails = emaild.getByName(facEmails, f);
+		Collection<Phone> phones = phoned.getByName(facPhones, f);
+		
+		
+		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses));
+		
+		
+		return "redirect:/facility/";
+		
 	}
 	
 	@RequestMapping(value="/addForm")

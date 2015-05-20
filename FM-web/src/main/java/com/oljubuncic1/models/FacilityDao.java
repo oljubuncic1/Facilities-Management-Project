@@ -57,6 +57,7 @@ public class FacilityDao implements ICrud<Facility, Integer>
 		
 		Integer id = (Integer) s.save(t);
 		tx.commit();
+		s.close();
 		return id;
 	}
 
@@ -67,17 +68,27 @@ public class FacilityDao implements ICrud<Facility, Integer>
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void update(Facility t) {
 		
 		
-		
-		 template.update(t);
-		
+		Session s = template.getSessionFactory().openSession();
+		Transaction tx = s.beginTransaction();
+		s.setFlushMode(FlushMode.AUTO);
+		s.update(t);
+		tx.commit();
+		s.close();
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public void delete(Integer id) {
-		template.delete(id);
+		Session s = template.getSessionFactory().openSession();
+		Transaction tx = s.beginTransaction();
+		s.setFlushMode(FlushMode.AUTO);
+		s.delete(read(id));
+		tx.commit();
+		s.close();
 		
 	}
 

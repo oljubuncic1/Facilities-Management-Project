@@ -8,6 +8,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -31,9 +33,9 @@ public class Category implements java.io.Serializable {
 	public Category() {
 	}
 
-	public Category(int id, Category parentCategory, String name) {
+	public Category(int id, String name) {
 		this.id = id;
-		this.parentCategory = parentCategory;
+		
 		this.name = name;
 	}
 
@@ -48,6 +50,7 @@ public class Category implements java.io.Serializable {
 
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	public int getId() {
 		return this.id;
 	}
@@ -57,7 +60,7 @@ public class Category implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_category_id", nullable = false)
+	@JoinColumn(name = "parent_category_id", nullable = true)
 	public Category getParentCategory() {
 		return this.parentCategory;
 	}
