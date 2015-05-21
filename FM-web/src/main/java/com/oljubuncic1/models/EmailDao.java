@@ -115,6 +115,7 @@ public class EmailDao implements ICrud<Email, Integer>
 		
 		for(String name:facEmails)
 		{
+			if(name.isEmpty()) continue;
 			String name1 = name.toUpperCase();
 			
 			List<Integer> id = (List<Integer>) template.findByNamedParam("select e.id from Email e where upper(e.address) = (:n)", "n", name1);

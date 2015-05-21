@@ -118,6 +118,10 @@ public class AddressDao implements ICrud<Address, Integer>
 		
 		for(int i = 0; i< streets.size();i++)
 		{
+			if(streets.get(i).isEmpty()) continue;
+			if(numbers.get(i).isEmpty()) continue;
+			if(codes.get(i).isEmpty()) continue;
+			
 			String street1 = streets.get(i).toUpperCase();
 			String number1 = numbers.get(i).toUpperCase();
 			String code1 = codes.get(i).toUpperCase();

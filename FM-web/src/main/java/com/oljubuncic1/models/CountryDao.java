@@ -114,6 +114,7 @@ public class CountryDao implements ICrud<Country, Integer>
 		
 		for(String name:names)
 		{
+			if(name.isEmpty()) continue;
 			String name1 = name.toUpperCase();
 			
 			List<Integer> id = (List<Integer>) template.findByNamedParam("select c.id from Country c where upper(c.name) = (:n)", "n", name1);

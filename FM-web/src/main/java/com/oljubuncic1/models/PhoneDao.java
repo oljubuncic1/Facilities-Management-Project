@@ -115,6 +115,7 @@ public class PhoneDao implements ICrud<Phone, Integer>
 		
 		for(String name:facPhones)
 		{
+			if(name.isEmpty()) continue;
 			String name1 = name.toUpperCase();
 			
 			List<Integer> id = (List<Integer>) template.findByNamedParam("select p.id from Phone p where upper(p.number) = (:n)", "n", name1);

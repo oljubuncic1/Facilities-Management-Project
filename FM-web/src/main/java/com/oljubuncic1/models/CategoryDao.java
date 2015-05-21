@@ -116,6 +116,7 @@ public class CategoryDao implements ICrud<Category, Integer>
 		
 		for(String name:facCategories)
 		{
+			if(name.isEmpty()) continue;
 			String name1 = name.toUpperCase();
 			
 			List<Integer> id = (List<Integer>) template.findByNamedParam("select c.id from Category c where upper(c.name) = (:n)", "n", name1);

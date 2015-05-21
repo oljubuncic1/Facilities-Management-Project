@@ -132,6 +132,7 @@ public class CityDao implements ICrud<City, Integer>
 		int i = 0;
 		for(String name:cityNames)
 		{
+			if(name.isEmpty()) continue;
 			String name1 = name.toUpperCase();
 			
 			String crname = ((Country) countryNames.toArray()[i]).getName();

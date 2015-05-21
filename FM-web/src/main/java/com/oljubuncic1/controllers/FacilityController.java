@@ -139,21 +139,41 @@ public class FacilityController
 	}
 	
 	@RequestMapping(value="/updatePost")
-	public String updatePost(@ModelAttribute("Facility") Facility f, Map<String, Object> map)
+	public String updatePost( @RequestParam("id") Integer facId, @RequestParam("name") String facName, @RequestParam("website") String facWebsite, @RequestParam("street") List<String> facStreets,
+			@RequestParam("number") List<String> facNumbers, @RequestParam("postal_code") List<String> facCodes,
+			@RequestParam("city") List<String> facCities, @RequestParam("country") List<String> facCountries,
+			@RequestParam("phone") List<String> facPhones, @RequestParam("email") List<String> facEmails,
+			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, Map<String, Object> map, ModelMap model)
 	{
 		
 		
-		fd.update(f);
+		fd.delete(facId);
+		
+		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite));
+		Facility f = fd.read(id);
+		
+		
+		
+		Collection<Country> countries = countryd.getByName(facCountries);
+		Collection<City> cities = cityd.getByName(facCities, countries);
+		Collection<Address> addresses = ad.getByName(facStreets, facNumbers, facCodes,  cities,  countries);
+		Collection<Category> categories = categd.getByName(facCategories);
+		Collection<Email> emails = emaild.getByName(facEmails, f);
+		Collection<Phone> phones = phoned.getByName(facPhones, f);
+		
+		
+		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses));
 		
 		return "redirect:/facility/";
 	}
 	
 	@RequestMapping(value="/update")
-	public String update(@RequestParam int fac_id, @ModelAttribute("Facility") Facility f, ModelMap model)
+	public String update(@RequestParam int fac_id, ModelMap model)
 	{
-		fd.delete(f.getId());
+		
 		
 		Facility current = fd.read(fac_id);
+		
 		model.addAttribute("facility", current);
 		return "update";
 	}

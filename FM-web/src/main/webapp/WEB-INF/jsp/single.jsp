@@ -107,6 +107,16 @@ html, body {
 
 	google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+
+		<script>
+				function del()
+				{
+					var r = confirm("The facility will be permanently deleted.");
+					if (r == true)
+						location.href='${pageContext.request.contextPath}/facility/delete?fac_id=${singleFacility.id }';
+				}
+			
+		</script>
 </head>
 <body>
 
@@ -165,7 +175,7 @@ html, body {
 				onclick="location.href='${pageContext.request.contextPath}/facility/update?fac_id=${singleFacility.id }'"
 				value="Change" value="Change"> <input type="button"
 				class="styled-button-8"
-				onclick="location.href='${pageContext.request.contextPath}/facility/delete?fac_id=${singleFacility.id }'"
+				onclick="del();"
 				value="Delete">
 		</div>
 	</div>

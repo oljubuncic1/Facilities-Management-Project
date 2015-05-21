@@ -29,13 +29,13 @@
 				<label>City: *</label>\
 			</div> <br>\
 			<div class="label">\
-				<input name="street" />\
+				<input name="street" required/>\
 			</div>\
 			<div class="label">\
-				<input name="number" />\
+				<input name="number" required/>\
 			</div>\
 			<div class="label">\
-				<input name="city" />\
+				<input name="city" required/>\
 			</div> <br>\
 			<div class="label">\
 				<label>Postal code: *</label>\
@@ -45,10 +45,10 @@
 			</div>\
 			<div class="label"><label style="color:rgb(230,230,230)">Add new address</label></div>\
 			<div class="label">\
-				<input name="postal_code" />\
+				<input name="postal_code" required/>\
 			</div>\
 			<div class="label">\
-				<input name="country" />\
+				<input name="country" required/>\
 			</div><div class="label">\
 			<label style="color:rgb(230,230,230)">Add new address</label>\
 			</div>  <br>'; 
@@ -65,7 +65,7 @@
 		function addPhone()
 		{
 			var s = '<label>Phone: *</label> <br>\
-			<input name="phone" /> <br>';
+			<input name="phone" required/> <br>';
 			
 			$("#phone_div").append(s);
 		}
@@ -73,7 +73,7 @@
 		function addCat()
 		{
 			var s = '<label>Category: *</label> <br>\
-			<input name="category" /> <br>';
+			<input name="category" required/> <br>';
 			
 			$("#cat_div").append(s);
 		}
@@ -81,7 +81,7 @@
 		function addEmail()
 		{
 			var s = '<label>Email: *</label> <br>\
-			<input name="email" /> <br>';
+			<input name="email" required/> <br>';
 			
 			$("#email_div").append(s);
 		}
@@ -92,7 +92,7 @@
 
 	<h1>Add new facility</h1>
 	
-	<p>${proba }</p>
+	
 
 	<form method="post" action="add">
 		<div id="main_input">
@@ -103,7 +103,7 @@
 			</p>
 
 
-			<label>Name: *</label> <br> <input name="name" /> <br>
+			<label>Name: *</label> <br> <input name="name" required/> <br>
 			<label>Website: </label> <br> <input name="website" /> <br>
 			
 
@@ -119,13 +119,13 @@
 					<label>City: *</label>
 				</div> <br>
 				<div class="label">
-					<input name="street" />
+					<input name="street" required/>
 				</div>
 				<div class="label">
-					<input name="number" />
+					<input name="number" required/>
 				</div>
 				<div class="label">
-					<input name="city" />
+					<input name="city" required/>
 				</div> <br>
 				
 				<div class="label">
@@ -138,10 +138,10 @@
 				<div class="label"><label style="color:rgb(230,230,230)">Add new address</label></div>
 				
 				<div class="label">
-					<input name="postal_code"/>
+					<input name="postal_code" required/>
 				</div>
 				<div class="label">
-					<input name="country" />
+					<input name="country" required/>
 				</div> 
 				<div class="label">
 					<label style="color:rgb(230,230,230)">Add new address</label>
@@ -164,7 +164,7 @@
 			
 			
 			
-				<input name="phone" /> <br>
+				<input name="phone" required/> <br>
 			
 			
 			
@@ -179,7 +179,7 @@
 			
 			
 			
-				<input name="email" /> <br>
+				<input name="email" required/> <br>
 			
 			
 			
@@ -194,7 +194,7 @@
 			
 			
 			
-				<input name="category" /> <br>
+				<input name="category" required/> <br>
 			
 			
 			
@@ -207,7 +207,7 @@
 			
 			
 			<br> <label>Description: *</label> <br>
-			<textarea name="description" cols="30" rows="5"></textarea>
+			<textarea name="description" cols="30" rows="5" required></textarea>
 
 			<div class="buttonsadd">
 				<input type="reset" class="styled-button-8" value="Reset"> <input
