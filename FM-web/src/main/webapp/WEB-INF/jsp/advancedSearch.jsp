@@ -162,7 +162,7 @@
 		<div class="single">
 			<div class="smallImage">
 				<img
-					src="http://grfx.cstv.com/schools/ksu/graphics/training-facility/bg-home4.jpg"
+					src=${pageContext.request.contextPath}/facility/image/${fac.id}
 					width="200" height="200">
 			</div>
 			<div class="smallInfo">

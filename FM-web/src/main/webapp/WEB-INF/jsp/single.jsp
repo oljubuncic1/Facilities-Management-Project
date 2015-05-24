@@ -127,7 +127,7 @@ html, body {
 	<div id="main_input">
 		<div class="image">
 			<img
-				src="http://grfx.cstv.com/schools/ksu/graphics/training-facility/bg-home4.jpg"
+				src=${pageContext.request.contextPath}/facility/image/${singleFacility.id}
 				width="300" height="300">
 		</div>
 

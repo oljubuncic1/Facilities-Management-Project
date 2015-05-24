@@ -31,6 +31,9 @@ public class Facility implements java.io.Serializable {
 	private String name;
 	private String description;
 	private String website;
+	private byte[] image;
+	
+
 	private Set<Category> categories = new HashSet<Category>(0);
 	private Set<Phone> phones = new HashSet<Phone>(0);
 	private Set<Email> emails = new HashSet<Email>(0);
@@ -39,16 +42,17 @@ public class Facility implements java.io.Serializable {
 	public Facility() {
 	}
 
-	public Facility(int id, String name, String description, String website) {
+	public Facility(int id, String name, String description, String website, byte[] image) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.website = website;
+		this.image = image;
 	}
 
 	public Facility(int id, String name, String description, String website,
 			Set<Category> categories, Set<Phone> phones, Set<Email> emails,
-			Set<Address> addresses) {
+			Set<Address> addresses, byte[] image) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -57,6 +61,7 @@ public class Facility implements java.io.Serializable {
 		this.phones = phones;
 		this.emails = emails;
 		this.addresses = addresses;
+		this.image = image;
 	}
 
 	@Id
@@ -95,6 +100,15 @@ public class Facility implements java.io.Serializable {
 
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+	
+	@Column(name = "image", nullable = true)
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)

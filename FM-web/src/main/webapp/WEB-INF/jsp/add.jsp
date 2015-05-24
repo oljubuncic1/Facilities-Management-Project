@@ -94,7 +94,7 @@
 	
 	
 
-	<form method="post" action="add">
+	<form method="post" action="add" enctype="multipart/form-data">
 		<div id="main_input">
 			<h2 id="input">Facility information</h2>
 
@@ -104,6 +104,7 @@
 
 
 			<label>Name: *</label> <br> <input name="name" required/> <br>
+			<label>Image: *</label> <br> <input type="file" name="image" required/> <br>
 			<label>Website: </label> <br> <input name="website" /> <br>
 			
 

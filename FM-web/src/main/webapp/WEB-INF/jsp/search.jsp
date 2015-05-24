@@ -158,7 +158,7 @@
 
 
 <div class="single">
-<div class="smallImage"><img src="http://grfx.cstv.com/schools/ksu/graphics/training-facility/bg-home4.jpg" width="200" height="200"></div>
+<div class="smallImage"><img src=${pageContext.request.contextPath}/facility/image/${fac.id} width="200" height="200"></div>
 <div class="smallInfo">
 <h2>${fac.name }</h2>
 <label>${fac.description }</label> <br>

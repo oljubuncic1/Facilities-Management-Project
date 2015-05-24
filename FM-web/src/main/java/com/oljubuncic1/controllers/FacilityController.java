@@ -19,6 +19,7 @@ import java.util.Map;
 
 import java.util.Set;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -78,9 +79,13 @@ public class FacilityController
 	public String index(ModelMap model)
 	{
 		
+		Collection<Facility> f = fd.getAll();
+		byte[] test = ((ArrayList<Facility>) f).get(0).getImage();
+		
 		model.addAttribute("facilitiesList", fd.getAll());
 		model.addAttribute("countriesList", countryd.getAll());
 		model.addAttribute("categoriesList", categd.getAll());
+		model.addAttribute("myImage", Base64.encodeBase64(test));
 		return "index";
 	}
 	
@@ -97,14 +102,26 @@ public class FacilityController
 			@RequestParam("number") List<String> facNumbers, @RequestParam("postal_code") List<String> facCodes,
 			@RequestParam("city") List<String> facCities, @RequestParam("country") List<String> facCountries,
 			@RequestParam("phone") List<String> facPhones, @RequestParam("email") List<String> facEmails,
-			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, Map<String, Object> map, ModelMap model)
+			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, @RequestParam("image") MultipartFile file, Map<String, Object> map, ModelMap model)
 	{
 		
 		//fd.create(f);
 		//fd.create(new Facility(123, "ime1", "web1", "desc1"));
 		//cityd.create(new City(1, new Country(1, "Drzava1"), "Grad1"));
 		
-		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite));
+		byte[] bytes = null;
+		
+		if (!file.isEmpty()) {
+            try {
+                bytes = file.getBytes();
+                
+            }
+            catch(Exception e) {}
+            
+		}
+		
+		
+		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite, bytes));
 		Facility f = fd.read(id);
 		
 		
@@ -117,7 +134,7 @@ public class FacilityController
 		Collection<Phone> phones = phoned.getByName(facPhones, f);
 		
 		
-		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses));
+		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses, bytes));
 		
 		
 		return "redirect:/facility/";
@@ -143,13 +160,23 @@ public class FacilityController
 			@RequestParam("number") List<String> facNumbers, @RequestParam("postal_code") List<String> facCodes,
 			@RequestParam("city") List<String> facCities, @RequestParam("country") List<String> facCountries,
 			@RequestParam("phone") List<String> facPhones, @RequestParam("email") List<String> facEmails,
-			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, Map<String, Object> map, ModelMap model)
+			@RequestParam("category") List<String> facCategories, @RequestParam("description") String facDesc, @RequestParam("image") MultipartFile file, Map<String, Object> map, ModelMap model)
 	{
 		
 		
 		fd.delete(facId);
+		byte[] bytes = null;
 		
-		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite));
+		if (!file.isEmpty()) {
+            try {
+                bytes = file.getBytes();
+                
+            }
+            catch(Exception e) {}
+            
+		}
+		
+		Integer id= fd.create(new Facility(1, facName, facDesc, facWebsite, bytes));
 		Facility f = fd.read(id);
 		
 		
@@ -162,7 +189,7 @@ public class FacilityController
 		Collection<Phone> phones = phoned.getByName(facPhones, f);
 		
 		
-		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses));
+		fd.update(new Facility(id, facName, facDesc, facWebsite, (Set<Category>) categories, (Set<Phone>) phones, (Set<Email>) emails, (Set<Address>) addresses, bytes));
 		
 		return "redirect:/facility/";
 	}
@@ -286,6 +313,14 @@ public class FacilityController
 		model.addAttribute("numberOfFac", n.size());
 		model.addAttribute("facilitiesList2", n);
 		return "advancedSearch";
+	}
+	
+	@RequestMapping(value="/image/{facId}")
+	public @ResponseBody byte[] getImage(@PathVariable Integer facId, ModelMap model)
+	{
+		Facility f = fd.read(facId);
+		return f.getImage();
+		
 	}
 	
 	

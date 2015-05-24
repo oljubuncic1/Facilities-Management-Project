@@ -91,7 +91,7 @@
 
 <h1>Facility update</h1>
 
-	<form method="post" action="updatePost">
+	<form method="post" action="updatePost" enctype="multipart/form-data">
 		<div id="main_input">
 			<h2 id="input">Facility information</h2>
 
@@ -101,6 +101,7 @@
 
 			<input type="hidden" name="id" value="${facility.id }">
 			<label>Name: *</label> <br> <input name="name" value="${facility.name }" required/> <br>
+			<label>Image: *</label> <br> <input type="file" name="image" required/> <br>
 			<label>Website: </label> <br> <input name="website" value="${facility.website }"/> <br>
 			
 
